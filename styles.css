@@ -1,0 +1,11 @@
+body {
+  background-color: rgb(255, 211, 233);
+}
+
+.note {
+  border-radius: 5px;
+  color: rgb(43, 3, 3);
+  padding: 5px;
+  font: "Gill Sans";
+  font-size: 20px;
+}
