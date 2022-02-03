@@ -14,7 +14,7 @@ class NotesView {
       this.displayNotes();
       this.noteInputEl.value = ""
 
-      this.api.getServerInfo(serverData => {
+      this.api.loadNotes(serverData => {
         console.log(serverData);
       });
     });
