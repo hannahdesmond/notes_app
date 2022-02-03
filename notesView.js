@@ -1,8 +1,9 @@
 //const { div } = require("prelude-ls");
 
 class NotesView {
-  constructor(model) {
+  constructor(model, api) {
     this.model = model;
+    this.api = api;
     this.mainContainerEl = document.querySelector('#main-container');
     this.noteInputEl = document.querySelector("#note-input");
     this.buttonEl = document.querySelector("#add-note-button");
@@ -12,7 +13,11 @@ class NotesView {
       this.clearNotes()
       this.displayNotes();
       this.noteInputEl.value = ""
-    })
+
+      this.api.getServerInfo(serverData => {
+        console.log(serverData);
+    });
+    });
   };
 
   addNote() {
@@ -25,6 +30,7 @@ class NotesView {
       div.className = "note";
       div.innerText = note;
       this.mainContainerEl.append(div);
+      console.log("result of fetch request")
     });
   };
 
@@ -34,6 +40,8 @@ class NotesView {
       note.remove();
     });
   };
+
+
 };
 
 module.exports = NotesView;
