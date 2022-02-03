@@ -16,7 +16,7 @@ class NotesView {
 
       this.api.getServerInfo(serverData => {
         console.log(serverData);
-    });
+      });
     });
   };
 
