@@ -9,6 +9,10 @@ const api = new NotesApi();
 const view = new NotesView(model, api);
 
 
-view.displayNotes();
+api.loadNotes((notes) => {
+  // This method is new — you'll need to add it to the model class
+  model.setNotes(notes);
+  view.displayNotes();
+});
 
 

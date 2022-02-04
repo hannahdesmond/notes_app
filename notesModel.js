@@ -11,6 +11,10 @@ class NotesModel{
     this.notes.push(note)
   }; 
 
+  setNotes = (notes_array) => {
+    this.notes = this.notes.concat(notes_array)
+  };
+
   reset = () => {
     this.notes = []
   }; 

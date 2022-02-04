@@ -17,6 +17,9 @@
         addNote = (note) => {
           this.notes.push(note);
         };
+        setNotes = (notes_array) => {
+          this.notes = this.notes.concat(notes_array);
+        };
         reset = () => {
           this.notes = [];
         };
@@ -40,9 +43,6 @@
             this.clearNotes();
             this.displayNotes();
             this.noteInputEl.value = "";
-            this.api.getServerInfo((serverData) => {
-              console.log(serverData);
-            });
           });
         }
         addNote() {
@@ -72,7 +72,7 @@
   var require_notesApi = __commonJS({
     "notesApi.js"(exports, module) {
       var NotesApi2 = class {
-        getServerInfo(callback) {
+        loadNotes(callback) {
           fetch("http://localhost:3000/notes").then((response) => response.json()).then((data) => {
             callback(data);
           });
@@ -90,5 +90,8 @@
   var model = new NotesModel();
   var api = new NotesApi();
   var view = new NotesView(model, api);
-  view.displayNotes();
+  api.loadNotes((notes) => {
+    model.setNotes(notes);
+    view.displayNotes();
+  });
 })();

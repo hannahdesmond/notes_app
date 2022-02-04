@@ -17,4 +17,12 @@ describe('NotesModel', () => {
     model.reset();
     expect(model.getNotes()).toEqual([]);
   });
+
+  it('should add array of notes to existing notes', () => {
+    model.addNote('Buy milk');
+    model.setNotes(["note trapped in an array"]);
+    expect(model.getNotes()).toEqual(
+      ["Buy milk", "note trapped in an array"]
+    );
+  });
 });
