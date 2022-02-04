@@ -18,7 +18,11 @@ class NotesView {
   };
 
   addNote() {
-    this.model.addNote(this.noteInputEl.value);
+    // this.model.addNote(this.noteInputEl.value);
+    this.api.uploadNote(this.noteInputEl.value, (response) => {
+      console.log('Note added!')
+      console.log(response)
+    }))
   };
 
   displayNotes() {
@@ -37,8 +41,6 @@ class NotesView {
       note.remove();
     });
   };
-
-
 }
 
 module.exports = NotesView;

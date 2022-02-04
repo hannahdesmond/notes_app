@@ -6,8 +6,9 @@ const NotesApi = require('./notesApi');
 require('jest-fetch-mock').enableMocks()
 
 describe('Notes API class', () => {
+  const api = new NotesApi();
+
   it('calls fetch and loads a note', async () => {
-    const api = new NotesApi();
     fetch.mockResponseOnce(JSON.stringify(
       ["a note of jibberish"]
       ));
@@ -16,4 +17,23 @@ describe('Notes API class', () => {
       expect(serverInfo[0]).toBe("a note of jibberish");
     });
   });
-})
+  
+  require('jest-fetch-mock').enableMocks()
+
+  it('creates a note and saves it in the backend', async () => {
+    fetch.mockResponseOnce(JSON.stringify(
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: "200 OK, everything's great!!!",
+      }
+    ));
+    
+    
+    api.uploadNote("irrelevant", (serverResponse) => {
+      expect(serverResponse.body).toBe("200 OK, everything's great!!!");
+    });
+  });
+});  
