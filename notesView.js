@@ -14,9 +14,6 @@ class NotesView {
       this.displayNotes();
       this.noteInputEl.value = ""
 
-      this.api.loadNotes(serverData => {
-        console.log(serverData);
-      });
     });
   };
 
@@ -42,6 +39,6 @@ class NotesView {
   };
 
 
-};
+}
 
 module.exports = NotesView;

@@ -5,18 +5,15 @@ const NotesApi = require('./notesApi');
 // // available within the browser)
 require('jest-fetch-mock').enableMocks()
 
+describe('Notes API class', () => {
+  it('calls fetch and loads a note', async () => {
+    const api = new NotesApi();
+    fetch.mockResponseOnce(JSON.stringify(
+      ["a note of jibberish"]
+      ));
 
-
-// describe('Github class', () => {
-//   it('calls fetch and loads repo info', async () => {
-//     const api = new GithubApi();
-//     fetch.mockResponseOnce(JSON.stringify({
-//       name: 'rails/rails',
-//       description: 'Ruby on Rails'
-//     }));
-
-//     api.getRepoInfo('rails/rails', (repoInfo) => {
-//       expect(repoInfo.description).toBe('Ruby on Rails');
-//     });
-//   });
-// });
+    api.loadNotes((serverInfo) => {
+      expect(serverInfo[0]).toBe("a note of jibberish");
+    });
+  });
+})
