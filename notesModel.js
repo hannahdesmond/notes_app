@@ -5,6 +5,7 @@ class NotesModel{
 
   getNotes = () => {
     return this.notes
+    // running in index.js and not returning server notes
   }; 
 
   addNote = (note) => {

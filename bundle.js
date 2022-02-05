@@ -46,15 +46,23 @@
           });
         }
         addNote() {
-          this.model.addNote(this.noteInputEl.value);
+          this.api.uploadNote(this.noteInputEl.value, (response) => {
+            console.log("Note added!");
+            this.model.setNotes(response);
+            // this.view.displayNotes();
+          });
         }
         displayNotes() {
+          console.log("this.model.getNotes inside displayNotes method: ");
+          console.log(this.model.getNotes());
           this.model.getNotes().forEach((note) => {
-            let div = document.createElement("div");
-            div.className = "note";
-            div.innerText = note;
-            this.mainContainerEl.append(div);
-            console.log("result of fetch request");
+            if (note != null) {
+              let div = document.createElement("div");
+              div.className = "note";
+              div.innerText = note;
+              this.mainContainerEl.append(div);
+              console.log("result of fetch request");
+            }
           });
         }
         clearNotes() {
@@ -75,6 +83,19 @@
         loadNotes(callback) {
           fetch("http://localhost:3000/notes").then((response) => response.json()).then((data) => {
             callback(data);
+          });
+        }
+        uploadNote(note, callback) {
+          fetch("http://localhost:3000/notes", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ content: note })
+          }).then((response) => response.json()).then((data) => {
+            callback(data);
+          }).catch((error) => {
+            console.error("Error:", error);
           });
         }
       };

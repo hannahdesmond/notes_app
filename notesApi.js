@@ -1,4 +1,5 @@
 class NotesApi {
+  
   loadNotes(callback) {
     fetch('http://localhost:3000/notes')
     .then(response => response.json())
@@ -13,7 +14,8 @@ class NotesApi {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(note),
+      body: JSON.stringify({content: note}),
+      // was trying to stringify a string
     })
     .then(response => response.json())
     .then(data => {

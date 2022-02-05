@@ -8,11 +8,17 @@ const model = new NotesModel();
 const api = new NotesApi();
 const view = new NotesView(model, api);
 
-
 api.loadNotes((notes) => {
-  // This method is new — you'll need to add it to the model class
+
+  // this method concats the notes from the server
+  // and the notes in the model and saves them in the model
+
   model.setNotes(notes);
+  // this is displaying before the resopnse 
+  // comes back from the server
+
   view.displayNotes();
+  
 });
 
 

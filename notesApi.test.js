@@ -27,13 +27,13 @@ describe('Notes API class', () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: "200 OK, everything's great!!!",
+        body: JSON.stringify({ "content": "Remember to reflect on my progress this week!" }),
       }
     ));
     
     
     api.uploadNote("irrelevant", (serverResponse) => {
-      expect(serverResponse.body).toBe("200 OK, everything's great!!!");
+      expect(serverResponse.body).toBe("Remember to reflect on my progress this week!");
     });
   });
 });  

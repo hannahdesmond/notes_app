@@ -16,6 +16,7 @@ app.get('/notes', (_req, res) => {
 });
 
 app.post('/notes', (req, res) => {
+  console.log(req.body)
   notes.push(req.body.content)
   res.send(JSON.stringify(notes));
 });
